@@ -12,18 +12,18 @@ import java.util.List;
  */
 public class SeniorEmployee extends GenericEmployee {
     private int maxBonus;
-    private final List<StrategyItem> maxBonusValidations;
+    private final Strategy<Integer> maxBonusValidations;
 
     SeniorEmployee() {
         super();
-        maxBonusValidations = new ArrayList<>();
-        maxBonusValidations.add(new AtLeast(1));
-        salaryValidations.add(new AtLeast(200));
-        monthsSpentValidations.add(new AtLeast(60));
+        maxBonusValidations = new Strategy<>();
+        maxBonusValidations.addStrategyItem(new AtLeast(1));
+        salaryValidations.addStrategyItem(new AtLeast(200));
+        monthsSpentValidations.addStrategyItem(new AtLeast(60));
     }
 
     public void setMaxBonus(int bonus) {
-        validate(maxBonusValidations, bonus);
+        maxBonusValidations.check(bonus);
         this.maxBonus = bonus;
     }
 }

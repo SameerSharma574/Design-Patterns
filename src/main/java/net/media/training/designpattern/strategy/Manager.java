@@ -12,17 +12,17 @@ import java.util.List;
  */
 public class Manager extends CompanyMember {
     private String managementBand;
-    private final List<StrategyItem> managementBandValidations;
+    private final Strategy<String> managementBandValidations;
 
     Manager() {
         super();
-        managementBandValidations = new ArrayList<>();
-        managementBandValidations.add(new NotEmpty());
-        monthsSpentValidations.clear();
+        managementBandValidations = new Strategy<>();
+        managementBandValidations.addStrategyItem(new NotEmpty());
+        monthsSpentValidations.empty();
     }
 
     public void setManagementBand(String managementBand) {
-        validate(managementBandValidations, managementBand);
+        managementBandValidations.check(managementBand);
         this.managementBand = managementBand;
     }
 }

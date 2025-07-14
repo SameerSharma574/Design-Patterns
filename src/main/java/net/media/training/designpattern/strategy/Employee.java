@@ -12,16 +12,16 @@ import java.util.List;
  */
 public class Employee extends GenericEmployee {
     private int maxAllowedLeaves;
-    private final List<StrategyItem> maxAllowedLeavesValidations;
+    private final Strategy<Integer> maxAllowedLeavesValidations;
 
     Employee() {
         super();
-        maxAllowedLeavesValidations = new ArrayList<>();
-        maxAllowedLeavesValidations.add(new AtLeast(1));
+        maxAllowedLeavesValidations = new Strategy<>();
+        maxAllowedLeavesValidations.addStrategyItem(new AtLeast(1));
     }
 
     public void setMaxAllowedLeaves(int leaves) {
-        validate(maxAllowedLeavesValidations, leaves);
+        maxAllowedLeavesValidations.check(leaves);
         this.maxAllowedLeaves = leaves;
     }
 }

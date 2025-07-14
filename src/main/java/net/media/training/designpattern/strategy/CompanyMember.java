@@ -16,14 +16,16 @@ public abstract class CompanyMember {
     protected int salary;
     protected int monthsSpent;
 
-    protected final List<StrategyItem> salaryValidations;
-    protected final List<StrategyItem> managerNameValidations;
-    protected final List<StrategyItem> monthsSpentValidations;
+    protected final Strategy<Integer> salaryValidations;
+    protected final Strategy<String> managerNameValidations;
+    protected final Strategy<Integer> monthsSpentValidations;
 
     public CompanyMember() {
-        salaryValidations = new ArrayList<>(List.of(new AtLeast(1)));
-        managerNameValidations = new ArrayList<>(List.of(new ValidateLength(50)));
-        monthsSpentValidations = new ArrayList<>();
+        salaryValidations = new Strategy<>();
+        managerNameValidations = new Strategy<>();
+        monthsSpentValidations = new Strategy<>();
+        salaryValidations.addStrategyItem(new AtLeast(1));
+        managerNameValidations.addStrategyItem(new ValidateLength(50));
     }
 
     protected void validateLength(String val, int allowedLength) {
@@ -57,17 +59,17 @@ public abstract class CompanyMember {
 
 
     public void setSalary(int salary) {
-        validate(salaryValidations, salary);
+        salaryValidations.check(salary);
         this.salary = salary;
     }
 
     public void setManagerName(String name) {
-        validate(managerNameValidations, name);
+        managerNameValidations.check(name);
         this.mgrName = name;
     }
 
     public void setMonthsSpent(int months) {
-        validate(monthsSpentValidations, months);
+        monthsSpentValidations.check(months);
         this.monthsSpent = months;
     }
 }

@@ -10,8 +10,8 @@ package net.media.training.designpattern.strategy;
 public abstract class GenericEmployee extends CompanyMember {
 
     GenericEmployee() {
-        salaryValidations.add(new AtMost(1000));
-        managerNameValidations.add(new NotEmpty());
-        monthsSpentValidations.add(new AtLeast(0));
+        salaryValidations.addStrategyItem(new AtMost(1000));
+        managerNameValidations.addStrategyItem(new NotEmpty());
+        monthsSpentValidations.addStrategyItem(new AtLeast(0));
     }
 }
