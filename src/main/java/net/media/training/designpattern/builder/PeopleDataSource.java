@@ -11,15 +11,28 @@ import java.util.List;
  */
 public class PeopleDataSource {
     public static String getPeopleXml(List<Person> persons) {
-        PeopleXMLBuilder builder = new PeopleXMLBuilder();
-        builder.add("<People number=\"")
-            .add(persons.size())
-            .add("\">");
+        XMLBuilder builder = new XMLBuilder();
+        builder.startElement("People")
+            .addAttribute("number", persons.size());
 
-        for (Person person : persons) {
-            builder.add(person);
-        }
-        builder.add("</People>");
+        persons.forEach(person -> addPerson(builder, person));
+        builder.endElement();
         return builder.build();
+    }
+
+    private static void addPerson(XMLBuilder xmlBuilder, Person person) {
+        xmlBuilder
+            .startElement("Person")
+            .addAttribute("id", String.valueOf(person.getId()))
+            .addAttribute("name", person.getName())
+            .startElement("Address")
+            .startElement("City")
+            .addText(person.getCity())
+            .endElement()
+            .startElement("Country")
+            .addText(person.getCountry())
+            .endElement()
+            .endElement() // ends Address
+            .endElement();
     }
 }

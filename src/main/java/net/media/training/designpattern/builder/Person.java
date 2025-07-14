@@ -35,23 +35,4 @@ public class Person {
     public String getCountry() {
         return country;
     }
-
-    public String toXML() {
-        StringBuilder xmlBuilder = new StringBuilder();
-        xmlBuilder.append("<Person id=\"")
-            .append(getId())
-            .append("\" name=\"")
-            .append(getName())
-            .append("\">");
-
-        xmlBuilder.append("<Address><City>")
-            .append(getCity())
-            .append("</City><Country>")
-            .append(getCountry())
-            .append("</Country></Address>");
-
-        xmlBuilder.append("</Person>");
-
-        return xmlBuilder.toString();
-    }
 }
