@@ -9,12 +9,11 @@ public class GameTestClient {
     public Game game;
 
     public void setup() {
-        person = new Person();
-        dog = new Dog();
-        cat = new Cat();
-        robot = new Robot();
-
-        sun = new Sun(robot, person, dog, cat);
+        this.sun = new Sun();
+        this.person = new Person(sun);
+        this.cat = new Cat(sun);
+        this.dog = new Dog(sun);
+        this.robot = new Robot(sun);
         game = new Game(sun);
     }
 

@@ -20,11 +20,11 @@ public class SunTestClient {
     private Sun sun;
 
     public SunTestClient() {
-        this.person = new Person();
-        this.cat = new Cat();
-        this.dog = new Dog();
-        this.robot = new Robot();
-        this.sun = new Sun(robot, person, dog, cat);
+        this.sun = new Sun();
+        this.person = new Person(sun);
+        this.cat = new Cat(sun);
+        this.dog = new Dog(sun);
+        this.robot = new Robot(sun);
     }
 
     public void aFewCharactersGoOutdoors() {

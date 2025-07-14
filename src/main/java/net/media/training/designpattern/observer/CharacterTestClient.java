@@ -14,10 +14,11 @@ public class CharacterTestClient {
     private Robot robot;
 
     public CharacterTestClient() {
-        robot = new Robot();
-        dog = new Dog();
-        person = new Person();
-        cat = new Cat();
+        Sun sun = new Sun();
+        this.person = new Person(sun);
+        this.cat = new Cat(sun);
+        this.dog = new Dog(sun);
+        this.robot = new Robot(sun);
     }
 
     public boolean testOutdoors() {

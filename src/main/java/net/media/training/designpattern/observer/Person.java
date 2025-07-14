@@ -7,25 +7,19 @@ package net.media.training.designpattern.observer;
  * Time: 9:35:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Person {
-    private boolean feelingWarm;
-    private boolean outdoors;
-    private boolean feelingTired;
+public class Person extends MovableObserver{
 
-    public boolean isFeelingWarm() {
-        return feelingWarm;
+    Person(Sun sun) {
+        super(sun);
     }
-
     public void goOutdoors() {
+        subject.registerObserver(this);
         outdoors = true;
     }
 
     public void goIndoors() {
+        subject.removeObserver(this);
         outdoors = false;
-    }
-
-    public boolean isOutdoors() {
-        return outdoors;
     }
 
     public void notifySunRose() {
@@ -39,7 +33,12 @@ public class Person {
             feelingTired = true;
     }
 
-    public boolean isFeelingTired() {
-        return feelingTired;
+    @Override
+    public void update(boolean isSunRise) {
+        if (isSunRise) {
+            notifySunRose();
+        } else {
+            notifySunSet();
+        }
     }
 }

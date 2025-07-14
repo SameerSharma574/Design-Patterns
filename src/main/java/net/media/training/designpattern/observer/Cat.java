@@ -7,25 +7,29 @@ package net.media.training.designpattern.observer;
  * Time: 10:13:41 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Cat {
-    private boolean outdoors;
-    private boolean feelingWarm;
-    private boolean feelingTired;
+public class Cat extends MovableObserver{
 
-    public boolean isFeelingWarm() {
-        return feelingWarm;
+    Cat(Sun sun) {
+        super(sun);
     }
 
     public void goOutdoors() {
+        subject.registerObserver(this);
         outdoors = true;
     }
 
-    public void goIndoors() {
-        outdoors = false;
+    @Override
+    public void update(boolean isSunRise) {
+        if (isSunRise) {
+            notifySunRose();
+        } else {
+            notifySunSet();
+        }
     }
 
-    public boolean isOutdoors() {
-        return outdoors;
+    public void goIndoors() {
+        subject.removeObserver(this);
+        outdoors = false;
     }
 
     public void notifySunRose() {
@@ -36,9 +40,5 @@ public class Cat {
         feelingWarm = false;
         if (outdoors)
             feelingTired = true;
-    }
-
-    public boolean isFeelingTired() {
-        return feelingTired;
     }
 }

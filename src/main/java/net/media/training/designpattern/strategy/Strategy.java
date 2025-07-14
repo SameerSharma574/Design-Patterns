@@ -7,10 +7,8 @@ public class Strategy<T> implements StrategyItem<T>{
 
   @Override
   public void check(T val) {
-    boolean answer;
     for(StrategyItem i : stratItemList){
-      answer = answer || i.check();
+      i.check(val);
     }
-    return answer;
   }
 }
